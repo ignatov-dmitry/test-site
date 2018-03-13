@@ -1,0 +1,10 @@
+<div>
+    <a routerLink="" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">Главная</a>  
+</div>
+<div *ngFor="let cat of Categories">
+<a [routerLink]="['/category', cat.Alias]" routerLinkActive="active" (click)="Init(cat.Alias);">{{cat.Name}}</a>
+</div>
+<div>
+<a [routerLink]="['cart']" routerLinkActive="active">Корзина</a>  
+</div>
+<router-outlet></router-outlet>

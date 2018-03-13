@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <h2>Корзина</h2>
+            <button (click)="this.appComp.clearCart()" class="btn btn-danger">Очистить корзину</button>
+            <table class="table table-striped">
+                <tr>
+                    <td>Название</td>
+                    <td>Описание</td>
+                    <td>Цена</td>
+                    <td>Количество</td>
+                    <td>Подробнее</td>
+                </tr>
+                <tr *ngFor="let product of cartLine">
+                    <td>{{product.product.Name}}</td>
+                    <td>{{product.product.Description}}</td>
+                    <td>{{product.product.Price}}</td>
+                    <td>{{product.count}}</td>
+                    <td>
+                        <a [routerLink]="['/product', product.product.Id]">Подробнее</a>
+                    </td>
+                </tr>
+            </table>
+            <div>Итого: {{ sum }} руб.</div>
+        </div>
+        <div class="col-md">
+            <h2>Заполните анкету</h2>
+            <div class="form-group">
+                <label>Фамилия</label>
+                <input type="text" class="form-control" name="Surname" [(ngModel)]="user.Surname" placeholder="Фамилия" #Surname="ngModel" required>
+                <small [hidden]="Surname.valid" class="form-text text-red">Не указана фамилия</small>
+            </div>
+            <div class="form-group">
+                <label>Имя</label>
+                <input type="text" class="form-control" name="Name" [(ngModel)]="user.Name" placeholder="Имя" #Name="ngModel" required>
+                <small [hidden]="Name.valid || Name.untouched" class="form-text text-red">
+                        Не указано имя
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Отчество</label>
+                <input type="text" class="form-control" name="MiddleName" [(ngModel)]="user.MiddleName" placeholder="Отчество" #MiddleName="ngModel" required>
+                <small [hidden]="MiddleName.valid || MiddleName.untouched" class="form-text text-red">
+                        Не указано отчество
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Адрес</label>
+                <textarea class="form-control" name="Address" [(ngModel)]="user.Address"  placeholder="Адрес" #Address="ngModel" required></textarea>
+                <small [hidden]="Address.valid || Address.untouched" class="form-text text-red">
+                        Не указан адрес
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Телефон</label>
+                <input type="text" class="form-control" name="Phone" [(ngModel)]="user.Phone" placeholder="Телефон">
+            </div>
+            <button [disabled]="Surname.invalid || Name.invalid || MiddleName.invalid || Address.invalid" (click)="send()" class="btn btn-primary">Заказать</button>
+        </div>
+    </div>
+</div>

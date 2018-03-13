@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <h1>Список товаров</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Название</td>
+                    <td>Описание</td>
+                    <td>Цена</td>
+                    <td>Количество на складе</td>
+                    <td>Картинка</td>
+                    <td>Ссылка</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of Products">
+                    <td>{{product.Id}}</td>
+                    <td>{{product.Name}}</td>
+                    <td>{{product.Description}}</td>
+                    <td>{{product.Price}}</td>
+                    <td>{{product.Count}}</td>
+                    <td *ngIf="!product.Files[0] == '';">
+                        <img src="http://localhost:49539/{{product.Files[0].Path}}" alt=""> </td>
+                    <td>
+                        <a [routerLink]="['/product', product.Id]">Подробнее</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

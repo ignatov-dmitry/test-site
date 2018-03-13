@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <h1>Список товаров</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Название</td>
+                    <td>Описание</td>
+                    <td>Цена</td>
+                    <td>Количество на складе</td>
+                    <td>Картинка</td>
+                    <td>Ссылка</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of Products">
+                    <ng-template [ngTemplateOutlet]="loadTemplate(product)" [ngTemplateOutletContext]="{ $implicit: product}">
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+        <div>{{statusMessage}}</div>
+
+
+        <!--шаблон для чтения-->
+        <ng-template #readOnlyTemplate let-product>
+            <td>{{product.Name}}</td>
+            <td>{{product.Description}}</td>
+            <td>{{product.Price}}</td>
+            <td>{{product.Count}}</td>
+            <td>
+                <a [routerLink]="['product', product.Id]">Подробнее</a>
+            </td>
+            <td *ngIf="!product.Files[0] =='' ">
+                <img src="https://localhost:44369/{{product.Files[0].Path}}" alt=""> </td>
+            <td>
+                <input type="hidden" [(ngModel)]="product.Id" name="Id">
+                <input type="hidden" [(ngModel)]="product.Price" name="Price">
+                <input type="hidden" [(ngModel)]="product.Name" name="Name">
+                <button (click)="this.appComp.addToCart(product)" value="В корзину">В корзину</button>
+            </td>
+        </ng-template>
+    </div>
+</div>
